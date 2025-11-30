@@ -226,6 +226,18 @@ frontend/
 - **API errors?** Ensure backend is live & `VITE_API_BASE_URL` has no double slashes.
 - **CORS?** Use the dev proxy (already configured) or whitelist the prod origin in Django.
 
+### 🚀 GitHub Pages Deployment
+This project includes a GitHub Actions workflow for automatic deployment to GitHub Pages:
+
+1. **Enable GitHub Pages**: Go to your repository Settings → Pages → Source: select "GitHub Actions"
+2. **Configure API URL (optional)**: Add a repository variable `VITE_API_BASE_URL` with your backend API URL
+3. **Deploy**: Push to the `main` branch or manually trigger the workflow from the Actions tab
+4. **Access**: Your site will be available at `https://<username>.github.io/Shoppin-website/`
+
+For custom domains:
+- Add a `CNAME` file to `frontend/public/` with your domain
+- Set repository variable `VITE_BASE_PATH` to `/`
+
 ---
 
 ## 🛰️ End-to-End Flight Plan

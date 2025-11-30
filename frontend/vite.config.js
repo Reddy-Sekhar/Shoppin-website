@@ -8,6 +8,9 @@ export default defineConfig(({ mode }) => {
   const apiBaseUrl = (env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/').replace(/\/$/, '')
 
   return {
+    // For GitHub Pages deployment, use repository name as base path
+    // Set VITE_BASE_PATH env var to '/' for custom domain or local development
+    base: env.VITE_BASE_PATH || '/Shoppin-website/',
     plugins: [react(), tailwindcss()],
     server: {
       proxy: {
