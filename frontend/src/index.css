@@ -1,0 +1,796 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f172a;
+  --color-primary-light: #1e293b;
+  --color-primary-dark: #020617;
+
+  --color-secondary: #f8fafc;
+  --color-secondary-dark: #e2e8f0;
+
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-50 text-slate-900 font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-slate-900;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl leading-snug;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md transition-all duration-200;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-hover shadow-lg shadow-accent/20;
+  }
+
+  .btn-outline {
+    @apply border border-slate-300 text-white bg-white/10 hover:bg-white hover:text-primary;
+  }
+}
+
+/* Dark theme overrides when html[data-theme="dark"] is set */
+/* Dark theme overrides when html[data-theme="dark"] is set */
+html[data-theme="dark"] {
+  --bg: #071022; /* main background */
+  --panel: #0f1724; /* cards, panels */
+  --muted: #9fb3d1;
+  --text: #e6eef8;
+  --subtle: rgba(255,255,255,0.04);
+  --accent: #f59e0b; /* slightly brighter accent */
+  --accent-strong: #d97706;
+  --card-shadow: 0 10px 25px rgba(2,6,23,0.6);
+}
+
+html[data-theme="dark"] body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Panels & cards */
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-secondary {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .text-slate-900,
+html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3 {
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .text-slate-600 {
+  color: var(--muted) !important;
+}
+
+/* Borders */
+html[data-theme="dark"] .border-slate-100,
+html[data-theme="dark"] .border-gray-100 {
+  border-color: var(--subtle) !important;
+}
+
+/* Buttons */
+html[data-theme="dark"] .btn-accent {
+  background-color: var(--accent) !important;
+  color: #071022 !important;
+}
+
+html[data-theme="dark"] .btn-outline {
+  border-color: rgba(255,255,255,0.06) !important;
+  color: var(--text) !important;
+}
+
+/* Navbar and sidebar */
+html[data-theme="dark"] nav {
+  background-color: rgba(7,16,34,0.85) !important;
+  color: var(--text);
+}
+
+html[data-theme="dark"] aside.w-64 {
+  background-color: #071226 !important;
+  color: var(--text);
+  border-right: 1px solid var(--subtle);
+}
+
+/* Shadows */
+html[data-theme="dark"] .shadow-sm {
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* Inputs, selects, textareas */
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: #0b1624 !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Tables */
+html[data-theme="dark"] table th,
+html[data-theme="dark"] table td {
+  border-color: rgba(255,255,255,0.03) !important;
+}
+
+/* Status / badges */
+html[data-theme="dark"] .bg-blue-100 {
+  background-color: rgba(59,130,246,0.12) !important;
+  color: #bfdefb !important;
+}
+html[data-theme="dark"] .bg-green-100 {
+  background-color: rgba(34,197,94,0.08) !important;
+  color: #bfeed0 !important;
+}
+html[data-theme="dark"] .bg-gray-100 {
+  background-color: rgba(255,255,255,0.03) !important;
+  color: var(--text) !important;
+}
+
+/* Hover utilities */
+html[data-theme="dark"] .hover\:bg-gray-50:hover {
+  background-color: rgba(255,255,255,0.02) !important;
+}
+
+/* Previews / image tiles */
+html[data-theme="dark"] img {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* Mobile menu, dropdowns */
+html[data-theme="dark"] .md\:hidden.bg-white {
+  background-color: #071022 !important;
+}
+
+/* subtle glow for accent elements */
+html[data-theme="dark"] .text-accent,
+html[data-theme="dark"] .bg-accent {
+  color: var(--accent) !important;
+}
+
+html[data-theme="dark"] .btn-accent {
+  box-shadow: 0 6px 18px rgba(245,158,11,0.12) !important;
+}
+
+/* Ensure links remain visible */
+html[data-theme="dark"] a {
+  color: var(--accent) !important;
+}
+
+/* Keep focus outlines accessible */
+html[data-theme="dark"] :focus {
+  outline-color: rgba(245,158,11,0.6) !important;
+}
+
+/* Extra rules to catch utility shadow classes that Tailwind emits like shadow-accent/x */
+html[data-theme="dark"] [class*="shadow-accent"] {
+  box-shadow: 0 10px 25px rgba(217,119,6,0.12) !important;
+}
+
+html[data-theme="dark"] [class*="shadow-primary"] {
+  box-shadow: 0 10px 25px rgba(2,16,35,0.5) !important;
+}
+
+/* Ensure accent backgrounds show readable text in dark mode */
+html[data-theme="dark"] .bg-accent {
+  background-color: var(--accent) !important;
+}
+
+/* Many places use `bg-accent text-primary` to show accent background with dark text in light mode.
+   In dark mode we want the text on accent backgrounds to be dark as well, so override those combos. */
+html[data-theme="dark"] .bg-accent.text-primary,
+html[data-theme="dark"] .bg-accent .text-primary,
+html[data-theme="dark"] .bg-accent .text-white {
+  color: #071022 !important;
+}
+
+/* General text-primary mapping in dark mode: headings/primary text should use the panel text color. */
+html[data-theme="dark"] .text-primary {
+  color: var(--text) !important;
+}
+
+/* Links and small accent elements should keep accent color */
+html[data-theme="dark"] .text-accent {
+  color: var(--accent) !important;
+}
+
+/* Map Tailwind gray classes used across components to dark-friendly colors */
+html[data-theme="dark"] .text-gray-900 {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .text-gray-600 {
+  color: var(--muted) !important;
+}
+html[data-theme="dark"] .placeholder-gray-500::placeholder,
+html[data-theme="dark"] .placeholder-gray-500 {
+  color: rgba(230,238,248,0.5) !important;
+}
+html[data-theme="dark"] .border-gray-300 {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Error alert mapping */
+html[data-theme="dark"] .bg-red-100 {
+  background-color: rgba(255,40,40,0.06) !important;
+  color: #ffd6d6 !important;
+}
+html[data-theme="dark"] .border-red-400 {
+  border-color: rgba(255,40,40,0.18) !important;
+}
+html[data-theme="dark"] .text-red-700 {
+  color: #ffb3b3 !important;
+}
+
+/* Button specific contrast adjustments */
+html[data-theme="dark"] .text-primary {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .bg-accent {
+  background-color: var(--accent) !important;
+}
+
+
+/* Global dark-mode polish: placeholders, shadows, icons, hover surfaces */
+html[data-theme="dark"] ::placeholder {
+  color: rgba(230,238,248,0.45) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .shadow-lg,
+html[data-theme="dark"] .shadow-xl {
+  box-shadow: 0 12px 30px rgba(2,6,23,0.65) !important;
+}
+
+/* Slightly lighter shadow for small cards */
+html[data-theme="dark"] .shadow-sm {
+  box-shadow: 0 8px 18px rgba(2,6,23,0.55) !important;
+}
+
+/* Make SVG icons inherit their parent's color in dark mode so per-component
+   text color utilities (e.g. `text-accent`, `text-primary`) control icon color. */
+html[data-theme="dark"] svg {
+  color: inherit !important;
+  stroke: currentColor !important; /* preserve outline icons without forcing fill */
+}
+
+/* Ensure logo images/SVGs keep their intended color in dark mode */
+html[data-theme="dark"] .site-logo img,
+html[data-theme="dark"] .brand-mark img,
+html[data-theme="dark"] .logo img {
+  filter: none !important;
+}
+
+/* Map common gray/text utility classes to dark-friendly values */
+html[data-theme="dark"] .text-gray-900 { color: var(--text) !important; }
+html[data-theme="dark"] .text-gray-800 { color: var(--text) !important; }
+html[data-theme="dark"] .text-gray-700 { color: var(--muted) !important; }
+html[data-theme="dark"] .text-gray-600 { color: var(--muted) !important; }
+html[data-theme="dark"] .text-gray-500 { color: var(--muted) !important; }
+html[data-theme="dark"] .text-gray-400 { color: rgba(230,238,248,0.45) !important; }
+
+/* Also map slate/smaller utilities used across components */
+html[data-theme="dark"] .text-slate-600 { color: var(--muted) !important; }
+html[data-theme="dark"] .text-slate-700 { color: var(--muted) !important; }
+
+/* Ensure default icon color in nav/sidebar uses the muted tone so icons contrast
+   with the dark background, while active/explicit classes still override it. */
+html[data-theme="dark"] nav, html[data-theme="dark"] aside, html[data-theme="dark"] .bg-white.rounded-xl {
+  color: var(--muted) !important;
+}
+
+/* Buttons: ensure text contrast and hover surfaces */
+html[data-theme="dark"] .bg-primary {
+  background-color: #071226 !important;
+  color: var(--text) !important;
+}
+
+html[data-theme="dark"] .bg-primary.text-white {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .bg-accent:hover,
+html[data-theme="dark"] .btn-accent:hover {
+  filter: brightness(0.95) !important;
+}
+
+/* For components that use white backgrounds with borders, ensure subtle contrast */
+html[data-theme="dark"] .border-gray-100 {
+  border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Specific: ensure profile page badges / floating buttons are visible */
+html[data-theme="dark"] .shadow-accent\/, .shadow-accent\/40, [class*="shadow-accent"] {
+  box-shadow: 0 8px 20px rgba(217,119,6,0.14) !important;
+}
+
+/* Ensure table header and body rows are clearly separated */
+html[data-theme="dark"] thead th {
+  background: rgba(255,255,255,0.02) !important;
+  color: var(--muted) !important;
+}
+
+html[data-theme="dark"] tbody tr:hover {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+/* Make sure links and inline actions are clear */
+html[data-theme="dark"] a.text-slate-600,
+html[data-theme="dark"] a.text-slate-700 {
+  color: var(--muted) !important;
+}
+
+/* Ensure primary headings still stand out */
+html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3 {
+  color: var(--text) !important;
+}
+
+/* Modal backgrounds / overlays darker but allow cards to pop */
+html[data-theme="dark"] .modal, html[data-theme="dark"] .overlay {
+  background: rgba(7,10,20,0.6) !important;
+}
+
+/* Make sure small utility badges remain readable */
+html[data-theme="dark"] .badge, html[data-theme="dark"] .rounded-full.bg-accent {
+  color: #071022 !important;
+  background: var(--accent) !important;
+}
+
+/* Broad utility mappings: cover commonly used Tailwind classes across the project
+   so dark mode has consistent, readable colors for backgrounds, borders, shadows, and text. */
+html[data-theme="dark"] .bg-white {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .bg-gray-50 {
+  background-color: rgba(255,255,255,0.02) !important;
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .bg-gray-100 {
+  background-color: rgba(255,255,255,0.01) !important;
+  color: var(--muted) !important;
+}
+html[data-theme="dark"] .bg-gray-200 { background-color: rgba(255,255,255,0.015) !important; }
+
+/* Borders */
+html[data-theme="dark"] .border-gray-100,
+html[data-theme="dark"] .border-slate-100 { border-color: rgba(255,255,255,0.04) !important; }
+
+/* Shadows: tone down bright shadows on dark backgrounds */
+html[data-theme="dark"] .shadow,
+html[data-theme="dark"] .shadow-sm,
+html[data-theme="dark"] .shadow-md,
+html[data-theme="dark"] .shadow-lg,
+html[data-theme="dark"] .shadow-xl,
+html[data-theme="dark"] .shadow-2xl { box-shadow: 0 10px 30px rgba(2,6,23,0.55) !important; }
+
+/* Hover surfaces */
+html[data-theme="dark"] .hover\:bg-gray-50:hover { background-color: rgba(255,255,255,0.02) !important; }
+
+/* Buttons and accents fallback */
+html[data-theme="dark"] .btn, html[data-theme="dark"] .btn-accent, html[data-theme="dark"] .btn-outline {
+  color: inherit !important;
+}
+
+/* Ensure inputs/selects default to panel tone */
+html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select {
+  background: rgba(255,255,255,0.02) !important;
+  border-color: rgba(255,255,255,0.04) !important;
+  color: var(--text) !important;
+}
+
+/* Small utility backgrounds used as badges */
+html[data-theme="dark"] .bg-blue-50 { background-color: rgba(59,130,246,0.06) !important; color: #cfe9ff !important; }
+html[data-theme="dark"] .bg-green-50 { background-color: rgba(34,197,94,0.06) !important; color: #cfefe0 !important; }
+html[data-theme="dark"] .bg-orange-50 { background-color: rgba(245,158,11,0.05) !important; color: #ffe1b8 !important; }
+
+/* Utility text weights mapping */
+html[data-theme="dark"] .font-medium, html[data-theme="dark"] .font-semibold { color: var(--text) !important; }
+
+/* Ensure icons in lists or small controls use muted color unless overridden */
+html[data-theme="dark"] .text-slate-400, html[data-theme="dark"] .text-gray-400 { color: rgba(230,238,248,0.45) !important; }
+
+
+/* Sidebar & menu icon fixes for dark mode */
+html[data-theme="dark"] aside {
+  background-color: #071226 !important;
+  color: var(--muted) !important;
+}
+
+/* Sidebar links: default muted text and icon color */
+html[data-theme="dark"] aside nav a {
+  color: var(--muted) !important;
+  background: transparent !important;
+}
+html[data-theme="dark"] aside nav a svg {
+  color: var(--muted) !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Active sidebar item (accent background): keep dark text on bright accent */
+html[data-theme="dark"] aside nav a.bg-accent {
+  background-color: var(--accent) !important;
+  color: #071022 !important;
+}
+html[data-theme="dark"] aside nav a.bg-accent svg {
+  color: #071022 !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Logout button contrast */
+html[data-theme="dark"] aside button[onClick], html[data-theme="dark"] aside .logout-btn {
+  color: #ff8b8b !important;
+}
+
+/* Dashboard recent activity: ensure headings, body text and timestamps are readable */
+html[data-theme="dark"] .bg-white.rounded-xl, html[data-theme="dark"] .bg-white.rounded-xl h2 {
+  background-color: rgba(255,255,255,0.02) !important;
+}
+/* Prevent individual paragraph elements from getting a boxed background */
+html[data-theme="dark"] .bg-white.rounded-xl p {
+  background: transparent !important;
+}
+html[data-theme="dark"] .bg-white.rounded-xl h2 {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .bg-white.rounded-xl .font-medium {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .bg-white.rounded-xl .text-gray-500,
+html[data-theme="dark"] .bg-white.rounded-xl .text-gray-400,
+html[data-theme="dark"] .bg-white.rounded-xl .text-sm {
+  color: var(--muted) !important;
+}
+
+/* Avatar circle initials */
+html[data-theme="dark"] .bg-gray-100 {
+  background-color: rgba(255,255,255,0.03) !important;
+  color: var(--muted) !important;
+}
+
+/* Borders inside recent activity */
+html[data-theme="dark"] .border-b.border-gray-50 {
+  border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Leads / LeadManagement table dark-mode fixes */
+html[data-theme="dark"] .bg-white.rounded-xl table {
+  color: var(--text) !important;
+}
+
+/* Ensure bg-gray-50 sections inside cards become dark panels (table header, modal top bars, status boxes) */
+html[data-theme="dark"] .bg-white.rounded-xl .bg-gray-50,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .bg-gray-50 {
+  background-color: rgba(255,255,255,0.02) !important;
+  border-color: rgba(255,255,255,0.04) !important;
+  color: var(--muted) !important;
+}
+
+/* Product interest cards and message box (bg-gray-50 / bg-gray-100) */
+html[data-theme="dark"] .bg-white.rounded-xl .bg-gray-100,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .bg-gray-100 {
+  background-color: rgba(255,255,255,0.01) !important;
+  border-color: rgba(255,255,255,0.03) !important;
+  color: var(--muted) !important;
+}
+
+/* Headings and heavy text inside modal/card should be bright */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .text-gray-900,
+html[data-theme="dark"] .bg-white.rounded-xl .text-gray-900 {
+  color: var(--text) !important;
+}
+
+/* Footer area in modal: make the bg darker and adjust button styles */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .border-t.border-gray-100,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .p-6.border-t {
+  border-top-color: rgba(255,255,255,0.04) !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .p-6.border-t.bg-gray-50,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .p-6.border-t {
+  background: rgba(255,255,255,0.01) !important;
+}
+
+/* Close Details (white button) -> make it subtle in dark mode */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl button.bg-white {
+  background: rgba(255,255,255,0.02) !important;
+  color: var(--muted) !important;
+  border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Ensure status badge text/background combinations remain readable */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .bg-blue-100 {
+  background-color: rgba(59,130,246,0.12) !important;
+  color: #bfdefb !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .bg-gray-50 span,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl .px-3.py-1.rounded-full {
+  color: var(--muted) !important;
+}
+
+/* Table header: muted labels */
+html[data-theme="dark"] .bg-white.rounded-xl thead th {
+  background: transparent !important;
+  color: var(--muted) !important;
+  border-bottom-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Table rows and cells */
+html[data-theme="dark"] .bg-white.rounded-xl tbody tr,
+html[data-theme="dark"] .bg-white.rounded-xl tbody td {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
+/* Hover state for rows */
+html[data-theme="dark"] .bg-white.rounded-xl tbody tr:hover {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+/* Divider lines */
+html[data-theme="dark"] .divide-y.divide-gray-100 > * + * {
+  border-top-color: rgba(255,255,255,0.03) !important;
+}
+
+/* Small text / meta info in leads */
+html[data-theme="dark"] .bg-white.rounded-xl .text-xs,
+html[data-theme="dark"] .bg-white.rounded-xl .text-sm {
+  color: var(--muted) !important;
+}
+
+/* Action buttons in table (eye button) */
+html[data-theme="dark"] .bg-white.rounded-xl button[title="View Details"] {
+  background: rgba(59,130,246,0.06) !important; /* subtle blue */
+  color: #9fc9fb !important;
+}
+html[data-theme="dark"] .bg-white.rounded-xl button[title="View Details"] svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Status select badge mapping: ensure readable bg/text combos */
+html[data-theme="dark"] .bg-blue-100 {
+  background-color: rgba(59,130,246,0.12) !important;
+  color: #bfdefb !important;
+}
+html[data-theme="dark"] .text-blue-800 { color: #9fc9fb !important; }
+html[data-theme="dark"] .bg-green-100 { background-color: rgba(34,197,94,0.08) !important; color: #bfeed0 !important; }
+html[data-theme="dark"] .text-green-700 { color: #a7eec3 !important; }
+html[data-theme="dark"] .bg-purple-100 { background-color: rgba(139,92,246,0.08) !important; color: #d8b9ff !important; }
+html[data-theme="dark"] .text-purple-800 { color: #caa6ff !important; }
+html[data-theme="dark"] .bg-yellow-100 { background-color: rgba(245,158,11,0.08) !important; color: #ffdf9f !important; }
+html[data-theme="dark"] .text-yellow-800 { color: #ffd79a !important; }
+html[data-theme="dark"] .bg-red-100 { background-color: rgba(255,40,40,0.06) !important; color: #ffb3b3 !important; }
+html[data-theme="dark"] .text-red-800 { color: #ffb3b3 !important; }
+
+/* Ensure select elements show readable text and remove inner white backgrounds */
+html[data-theme="dark"] .bg-white.rounded-xl select,
+html[data-theme="dark"] .bg-white.rounded-xl select option {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
+
+
+/* Targeted Login & auth polish for both themes */
+/* Reduce heavy shadows, make inputs crisp, ensure button contrast */
+/* Use conservative selectors to avoid breaking other pages */
+
+/* Centered login card / auth panel */
+.auth-card, .login-card, .signin-card, .login-panel {
+  background: rgba(255,255,255,0.98);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 30px rgba(14,30,60,0.12);
+}
+
+/* In dark mode make the auth card match the panel tone */
+html[data-theme="dark"] .auth-card,
+html[data-theme="dark"] .login-card,
+html[data-theme="dark"] .signin-card,
+html[data-theme="dark"] .login-panel {
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+  box-shadow: 0 8px 22px rgba(2,6,23,0.55) !important;
+}
+
+/* Inputs: consistent padding, rounded corners and subtle borders */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+.form-control,
+.input,
+.input-lg {
+  border-radius: 8px;
+  padding: 0.75rem 1rem !important;
+  background: #f1f7fb;
+  border: 1px solid rgba(15,23,42,0.04);
+  color: #0b1220;
+  box-shadow: none !important;
+}
+
+/* Dark-mode inputs */
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .input,
+html[data-theme="dark"] .input-lg {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  color: var(--text) !important;
+}
+
+/* Placeholder visibility */
+::placeholder { color: rgba(15,23,42,0.45); }
+html[data-theme="dark"] ::placeholder { color: rgba(230,238,248,0.45) !important; }
+
+/* Action button: reduce overwhelming shadow and keep color consistent */
+.btn-accent {
+  border-radius: 10px;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  box-shadow: 0 10px 24px rgba(14,30,60,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-accent:active { transform: translateY(1px); }
+
+html[data-theme="dark"] .btn-accent {
+  background-color: var(--accent) !important;
+  color: #071022 !important;
+  box-shadow: 0 6px 14px rgba(2,6,23,0.6) !important;
+}
+
+/* Tone down very large utility shadows that affect the centered button */
+html[data-theme="dark"] .shadow-2xl, html[data-theme="dark"] .shadow-3xl, html[data-theme="dark"] .shadow-4xl {
+  box-shadow: 0 12px 30px rgba(2,6,23,0.55) !important;
+}
+.shadow-2xl, .shadow-3xl, .shadow-4xl {
+  box-shadow: 0 14px 36px rgba(14,30,60,0.12) !important;
+}
+
+/* Links and small actions in auth area */
+.auth-card a,
+.login-card a,
+.signin-card a { color: var(--accent-strong); font-weight: 600; }
+html[data-theme="dark"] .auth-card a,
+html[data-theme="dark"] .login-card a,
+html[data-theme="dark"] .signin-card a { color: var(--accent) !important; }
+
+/* Make logo and header icon visible on dark background */
+.site-logo, .brand-mark, .logo { color: var(--accent) !important; fill: currentColor !important; }
+html[data-theme="dark"] .site-logo, html[data-theme="dark"] .brand-mark, html[data-theme="dark"] .logo { color: var(--accent) !important; }
+
+/* Ensure the top navbar remains slightly translucent in dark mode so page color reads as a whole */
+html[data-theme="dark"] nav {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Final safety: make sure primary headings in auth area are bold and visible */
+.auth-card h1, .login-card h1, .signin-card h1 { color: #071022; }
+html[data-theme="dark"] .auth-card h1, html[data-theme="dark"] .login-card h1, html[data-theme="dark"] .signin-card h1 { color: var(--text) !important; }
+
+/* Inquiry modal dark-mode fixes */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl,
+html[data-theme="dark"] .bg-white.rounded-2xl {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--subtle) !important;
+  box-shadow: 0 14px 40px rgba(2,6,23,0.65) !important;
+}
+
+/* Modal header */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl > .flex[role],
+html[data-theme="dark"] .bg-white.rounded-2xl > .flex {
+  background: transparent !important;
+  border-bottom-color: rgba(255,255,255,0.04) !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl h3,
+html[data-theme="dark"] .bg-white.rounded-2xl h3 {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl p,
+html[data-theme="dark"] .bg-white.rounded-2xl p {
+  color: var(--muted) !important;
+}
+
+/* Close button */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl button.p-2.rounded-full {
+  background: transparent !important;
+  color: var(--muted) !important;
+}
+
+/* Inputs inside modal */
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl input,
+html[data-theme="dark"] .fixed.inset-0 .bg-white.rounded-2xl textarea,
+html[data-theme="dark"] .bg-white.rounded-2xl .form-control,
+html[data-theme="dark"] .bg-white.rounded-2xl .input,
+html[data-theme="dark"] .bg-white.rounded-2xl .input-lg {
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+  color: var(--text) !important;
+}
+
+/* Upload / dashed area */
+html[data-theme="dark"] .fixed.inset-0 .border-dashed.border-gray-200 {
+  border-color: rgba(255,255,255,0.04) !important;
+  background: rgba(255,255,255,0.01) !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .border-dashed p,
+html[data-theme="dark"] .fixed.inset-0 .border-dashed .text-sm {
+  color: var(--muted) !important;
+}
+
+/* Upload icon circle */
+html[data-theme="dark"] .fixed.inset-0 .w-12.h-12.bg-orange-50 {
+  background: rgba(245,158,11,0.12) !important;
+  color: var(--accent) !important;
+}
+
+/* Image previews and remove button */
+html[data-theme="dark"] .fixed.inset-0 .relative.w-20.h-20 {
+  border-color: rgba(255,255,255,0.04) !important;
+}
+html[data-theme="dark"] .fixed.inset-0 .relative.w-20.h-20 button {
+  background: rgba(255,255,255,0.02) !important;
+  color: #ff9b9b !important;
+}
+
+/* Error box */
+html[data-theme="dark"] .fixed.inset-0 .p-3.bg-red-50 {
+  background: rgba(255,40,40,0.06) !important;
+  color: #ffb3b3 !important;
+}
+
+/* Submit button: tone down heavy gradient shadow */
+html[data-theme="dark"] .fixed.inset-0 .bg-gradient-to-r.from-orange-500,
+html[data-theme="dark"] .fixed.inset-0 .bg-gradient-to-r.to-orange-600,
+html[data-theme="dark"] .fixed.inset-0 .bg-gradient-to-r.from-orange-600,
+html[data-theme="dark"] .fixed.inset-0 .bg-gradient-to-r.to-orange-700 {
+  /* keep colors but make shadow subtler */
+}
+html[data-theme="dark"] .fixed.inset-0 .w-full.bg-gradient-to-r {
+  box-shadow: 0 8px 22px rgba(2,6,23,0.6) !important;
+}
+
+
