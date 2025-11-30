@@ -6,11 +6,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const apiBaseUrl = (env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/').replace(/\/$/, '')
+  
+  // For GitHub Pages deployment, set VITE_BASE_PATH to your repository name (e.g., '/Shoppin-website/')
+  // For local development or custom domains, set to '/' or leave unset
+  const basePath = mode === 'production' 
+    ? (env.VITE_BASE_PATH || '/Shoppin-website/')
+    : '/'
 
   return {
-    // For GitHub Pages deployment, use repository name as base path
-    // Set VITE_BASE_PATH env var to '/' for custom domain or local development
-    base: env.VITE_BASE_PATH || '/Shoppin-website/',
+    base: basePath,
     plugins: [react(), tailwindcss()],
     server: {
       proxy: {
